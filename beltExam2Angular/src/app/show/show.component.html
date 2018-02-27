@@ -1,0 +1,11 @@
+<a href [routerLink] = "['/home']"> Home </a>
+<h3>Product Details</h3>
+<p>Name: {{theProduct.name}}</p>
+<p>Qty: {{theProduct.qty}}</p>
+<p>Price: {{theProduct.price}}</p>
+
+<!-- <button *ngIf = "thetheProduct.qty == 0" (click) = "delete()" [routerLink] = "['/products']">Delete</button>
+<button *ngIf = "thetheProduct.qty != 0" disabled = true> Delete</button> -->
+
+<button (click) = "delete()" [routerLink] = "['/products']">Delete</button>
+<button [routerLink] = "['/products']" > Back </button>
