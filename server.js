@@ -18,7 +18,7 @@ mongoose.Promise = global.Promise;
 
 let ProductSchema = new mongoose.Schema({
     name: {type: String, required: true, minlength: [3, "Product name must be greater than 3 characters!"]},
-    qty: {type: Number, required: true, min: [1, "Quantity must be greater than 0!"]},
+    qty: {type: Number, required: true, min: [0, "Quantity cannoot be less than 0!"]},
     price: {type: Number, required: true, min: [1, "Price must be greater than 0!"]},
 }, {timestamps: true});
 

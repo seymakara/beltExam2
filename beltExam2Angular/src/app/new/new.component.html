@@ -6,14 +6,45 @@
 <p *ngIf="validationError.qty">{{validationError.qty.message | json}}</p>
 <p *ngIf="validationError.price">{{validationError.price.message | json}}</p>
 
+<div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+    <div *ngIf="name.errors.required">
+        Name is required.
+    </div>
+    <div *ngIf="name.errors.minlength">
+        Name must be at least 3 characters long.
+    </div>
+</div>
 
-Name: <input type="text" name= "name" required minlength="3" [(ngModel)] = "newProduct.name" #name = "ngModel"/><br><br>
-Qty: <input type="number" name= "qty" required min = 1 [(ngModel)] = "newProduct.qty" #qty = "ngModel"/><br><br>
-Price: <input type="number" name= "price" required min = 1 [(ngModel)] = "newProduct.price" #price = "ngModel"/><br><br>
-<input type="button" value="Create" (click) = "addProduct()" >
+<div *ngIf="qty.invalid && (qty.dirty || qty.touched)" class="alert alert-danger">
+    <div *ngIf="qty.errors.required">
+        Quantity is required.
+    </div>
+    <div *ngIf="qty.errors.pattern">
+        Quantity cannot be less than 0.
+    </div>
+</div>
 
-<!-- <input *ngIf="!(name.errors)" type="button" value="Create" (click) = "addProduct()" > 
-<input *ngIf="name.errors" type="button" value="Create" disabled = true >  -->
+<div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+    <div *ngIf="price.errors.required">
+        Price is required.
+    </div>
+    <div *ngIf="price.errors.pattern">
+        Price must be more than 0.
+    </div>
+</div>
+
+<form class="newProduct">
+  Name: <input type="text" name= "name" required minlength="3" [(ngModel)] = "newProduct.name" #name = "ngModel"/><br><br>
+  Qty: <input type="text" name= "qty" required pattern="^\+?(0|[1-9]\d*)$" [(ngModel)] = "newProduct.qty" #qty = "ngModel"/><br><br>
+  Price: <input type="text" name= "price" required pattern="^\+?[1-9]\d*$" [(ngModel)] = "newProduct.price" #price = "ngModel" placeholder="$"/><br><br>
+
+  <input *ngIf="!(name.errors || qty.errors || price.errors)" type="button" value="Create" (click) = "addProduct()" > 
+  <input *ngIf="(name.errors || qty.errors || price.errors)" type="button" value="Create" disabled = true> 
+</form>
+
+<!-- <input type="button" value="Create" (click) = "addProduct()" > -->
+
+
 
 
 <button value="Cancel" [routerLink] = "['/products']">Cancel</button>

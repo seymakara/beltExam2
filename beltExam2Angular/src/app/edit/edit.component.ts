@@ -49,6 +49,11 @@ export class EditComponent implements OnInit {
       }
     })
   };
+  reset(){
+    let ID= this.productID 
+    console.log("editcomponent.ts ID: ", ID)
+    this.getTheProduct(ID)
+  }
 
 
 }
